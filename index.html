@@ -372,13 +372,6 @@ const CATEGORY_LABELS = {
   wallpaper:'Wallpaper'
 };
 
-const DEMO_ITEMS = {
-  recent:[
-    {id:'demo-1',title:'Luxury Product Campaign',category:'Ads & Product',model:'GPT Image',creator:'FadlyDats AI',likes:128,prompt:'Create a premium commercial product campaign with cinematic studio lighting, detailed reflections, elegant composition, dramatic depth, high-end advertising photography and clean brand presentation.',featured:true,newest:true,popular:true},
-    {id:'demo-2',title:'Editorial Portrait',category:'Portraits',model:'GPT Image',creator:'FadlyDats AI',likes:94,prompt:'Create an ultra-realistic editorial portrait with natural skin detail, sophisticated studio lighting, clean fashion styling, realistic depth of field and premium magazine campaign aesthetics.',featured:true,newest:true,popular:false},
-    {id:'demo-3',title:'Cinematic Video Story',category:'Videos',model:'Seedance',creator:'FadlyDats AI',likes:76,prompt:'Create a cinematic tracking shot with controlled camera movement, realistic lighting changes, atmospheric depth, natural subject motion, detailed environment and premium film color grading.',featured:true,newest:false,popular:true}
-  ]
-};
 
 let currentCategory='recent';
 let currentItems=[];
@@ -433,14 +426,15 @@ async function loadCategory(category){
   try{
     const res=await fetch(CONFIG.WORKER_BASE+'/showcase?category='+encodeURIComponent(category),{cache:'no-store'});
     const data=await res.json();
+    if(!res.ok || data.ok === false){
+      throw new Error(data.error || 'Worker request failed');
+    }
     currentItems=Array.isArray(data.items)?data.items:[];
   }catch(e){
     currentItems=[];
+    msg('Showcase gagal dimuat: '+(e?.message || 'unknown error'));
   }
 
-  if(!currentItems.length){
-    currentItems=(DEMO_ITEMS[category]||DEMO_ITEMS.recent||[]).map((x,i)=>({...x,id:x.id||category+'-'+i}));
-  }
   renderCurrent();
 }
 
@@ -485,7 +479,7 @@ function renderCurrent(){
   grid.innerHTML='';
   if(!items.length){
     grid.className='';
-    grid.innerHTML='<div class="empty">Belum ada data showcase untuk kategori ini. Tambahkan item di Worker, lalu data akan muncul otomatis di sini.</div>';
+    grid.innerHTML='<div class="empty">Belum ada item yang berhasil diambil untuk kategori ini. Cek Worker atau sumber kategori.</div>';
     return;
   }
 
