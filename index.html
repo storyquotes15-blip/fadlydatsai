@@ -4,67 +4,578 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>FadlyDats AI</title>
+<meta name="description" content="FadlyDats AI — discover AI prompts, showcase ideas, and continue generating with your preferred AI tools.">
 <style>
-*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:Arial,Helvetica,sans-serif;background:#030306;color:#fff}body{overflow-x:hidden}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+html,body{margin:0;min-height:100%;font-family:Arial,Helvetica,sans-serif;background:#030306;color:#fff}
+body{overflow-x:hidden}
+:root{
+  --bg:#030306;
+  --panel:#0b0b11;
+  --panel2:#11111a;
+  --line:rgba(255,255,255,.09);
+  --muted:#9b9baa;
+  --purple:#8b5cf6;
+  --purple2:#c084fc;
+  --pink:#e879f9;
+  --white:#fff;
+}
+button,input{font:inherit}
+a{text-decoration:none;color:inherit}
+section{position:relative}
+.wrap{width:min(1480px,calc(100% - 42px));margin:auto}
 .hero{position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden;background:#050507}
 .hero-bg{position:absolute;inset:-3%;width:106%;height:106%;object-fit:cover;object-position:center;filter:saturate(1.08);animation:heroZoom 18s ease-in-out infinite alternate}
 .overlay{position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.78) 0%,rgba(0,0,0,.52) 28%,rgba(0,0,0,.36) 55%,rgba(0,0,0,.68) 100%)}
 .glow{position:absolute;inset:0;background:radial-gradient(circle at 16% 55%,rgba(37,99,235,.22),transparent 30%),radial-gradient(circle at 82% 22%,rgba(236,72,153,.20),transparent 25%),radial-gradient(circle at 69% 60%,rgba(139,92,246,.17),transparent 28%)}
-header{position:absolute;z-index:5;top:0;left:0;right:0;height:88px;display:flex;align-items:center;justify-content:space-between;padding:0 54px;background:linear-gradient(to bottom,rgba(0,0,0,.42),transparent)}
+header{position:absolute;z-index:15;top:0;left:0;right:0;height:88px;display:flex;align-items:center;justify-content:space-between;padding:0 54px;background:linear-gradient(to bottom,rgba(0,0,0,.48),transparent)}
 .logo{width:190px;height:auto;display:block;filter:drop-shadow(0 0 18px rgba(139,92,246,.34))}
-nav{display:flex;gap:36px;align-items:center}nav button{background:none;border:none;color:#aaa;font-weight:700;font-size:12px;letter-spacing:.15em;cursor:pointer}nav button.active,nav button:hover{color:#fff}
+nav{display:flex;gap:30px;align-items:center}
+nav button{background:none;border:none;color:#aaa;font-weight:700;font-size:11px;letter-spacing:.15em;cursor:pointer}
+nav button.active,nav button:hover{color:#fff}
 .top-btn{border:1px solid rgba(192,132,252,.5);background:rgba(5,5,8,.6);color:#fff;border-radius:10px;padding:12px 16px;font-weight:800;cursor:pointer;box-shadow:0 0 20px rgba(139,92,246,.12)}
 .content{position:relative;z-index:3;width:min(760px,58vw);margin-left:11vw;padding-top:70px}
 .eyebrow{font-size:14px;letter-spacing:.24em;color:#e879f9;font-weight:800;margin-bottom:16px;text-transform:uppercase}
 h1{font-size:clamp(54px,7.5vw,106px);line-height:.91;letter-spacing:-.055em;margin:0;font-weight:900;text-shadow:0 4px 30px rgba(0,0,0,.4)}
 h1 .purple{background:linear-gradient(90deg,#f0abfc,#c084fc,#8b5cf6);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 22px rgba(168,85,247,.28))}
-.track{display:flex;align-items:center;gap:7px;margin:26px 0 28px}.track .a{height:2px;width:80px;background:linear-gradient(90deg,#d946ef,#a855f7);box-shadow:0 0 10px #a855f7}.track .dot{width:4px;height:4px;border-radius:50%;background:#fff}.track .b{height:1px;width:100px;background:#333}
+.track{display:flex;align-items:center;gap:7px;margin:26px 0 28px}
+.track .a{height:2px;width:80px;background:linear-gradient(90deg,#d946ef,#a855f7);box-shadow:0 0 10px #a855f7}
+.track .dot{width:4px;height:4px;border-radius:50%;background:#fff}
+.track .b{height:1px;width:100px;background:#333}
 .desc{max-width:620px;color:#d4d4d8;line-height:1.65;font-size:16px;text-shadow:0 2px 12px rgba(0,0,0,.65)}
-.ctas{display:flex;gap:14px;margin-top:30px;flex-wrap:wrap}.cta-primary,.cta-secondary{border-radius:10px;padding:15px 23px;font-size:12px;font-weight:900;letter-spacing:.12em;cursor:pointer}.cta-primary{border:none;color:white;background:linear-gradient(90deg,#7c3aed,#9333ea);box-shadow:0 0 28px rgba(147,51,234,.42)}.cta-secondary{color:#fff;border:1px solid #555;background:rgba(8,8,12,.58)}
-.rail{position:absolute;z-index:4;left:45px;top:120px;bottom:58px;display:flex;flex-direction:column;justify-content:space-between;align-items:center}.line{width:1px;height:150px;background:linear-gradient(#d8b4fe,rgba(168,85,247,.35),rgba(255,255,255,.15));position:relative}.line:before{content:"";position:absolute;top:-5px;left:-4px;width:9px;height:9px;background:#e9d5ff;border-radius:50%;box-shadow:0 0 16px #c084fc}.social{display:grid;gap:24px;color:#aaa;font-weight:bold;font-size:12px}
-.bio-links{position:fixed;right:24px;bottom:92px;z-index:12;width:230px;padding:14px;border:1px solid rgba(255,255,255,.10);border-radius:18px;background:rgba(8,8,12,.72);backdrop-filter:blur(18px);box-shadow:0 18px 55px rgba(0,0,0,.35)}.bio-label{font-size:10px;letter-spacing:.18em;color:#a1a1aa;font-weight:800;margin:0 0 10px 2px}.bio-link{display:flex;align-items:center;gap:10px;width:100%;margin-top:8px;padding:11px 12px;border-radius:12px;text-decoration:none;color:#fff;font-size:12px;font-weight:850;letter-spacing:.04em;border:1px solid rgba(255,255,255,.08);transition:.2s}.bio-link:hover{transform:translateY(-1px);border-color:rgba(192,132,252,.42);box-shadow:0 0 20px rgba(139,92,246,.14)}.bio-link svg{width:18px;height:18px;flex:0 0 18px}.bio-link.whatsapp{background:rgba(31,41,35,.82)}.bio-link.telegram{background:rgba(17,32,49,.84)}.footer{position:absolute;z-index:4;left:0;right:0;bottom:18px;text-align:center;color:#8d8d94;font-size:11px;letter-spacing:.04em;padding:0 20px}.toast{position:fixed;right:22px;bottom:22px;z-index:20;background:rgba(18,18,22,.94);border:1px solid rgba(168,85,247,.4);padding:11px 14px;border-radius:10px;color:#e9d5ff;font-size:12px;display:none}
+.ctas{display:flex;gap:14px;margin-top:30px;flex-wrap:wrap}
+.cta-primary,.cta-secondary{border-radius:10px;padding:15px 23px;font-size:12px;font-weight:900;letter-spacing:.12em;cursor:pointer}
+.cta-primary{border:none;color:white;background:linear-gradient(90deg,#7c3aed,#9333ea);box-shadow:0 0 28px rgba(147,51,234,.42)}
+.cta-secondary{color:#fff;border:1px solid #555;background:rgba(8,8,12,.58)}
+.rail{position:absolute;z-index:4;left:45px;top:120px;bottom:58px;display:flex;flex-direction:column;justify-content:space-between;align-items:center}
+.line{width:1px;height:150px;background:linear-gradient(#d8b4fe,rgba(168,85,247,.35),rgba(255,255,255,.15));position:relative}
+.line:before{content:"";position:absolute;top:-5px;left:-4px;width:9px;height:9px;background:#e9d5ff;border-radius:50%;box-shadow:0 0 16px #c084fc}
+.social{display:grid;gap:24px;color:#aaa;font-weight:bold;font-size:12px}
+.social a:hover{color:#fff}
+
+.section{padding:92px 0}
+.section.dark{background:#050508}
+.section.alt{background:linear-gradient(180deg,#07070b,#040407)}
+.section-head{display:flex;justify-content:space-between;gap:30px;align-items:end;margin-bottom:28px}
+.section-kicker{font-size:11px;letter-spacing:.18em;color:#c084fc;font-weight:900;text-transform:uppercase}
+.section-title{font-size:clamp(34px,4.8vw,64px);letter-spacing:-.045em;line-height:1;margin:8px 0 0}
+.section-copy{color:var(--muted);max-width:560px;line-height:1.65;font-size:14px}
+
+.category-bar{position:sticky;top:0;z-index:25;padding:12px 0;background:rgba(3,3,6,.88);backdrop-filter:blur(18px);border-top:1px solid rgba(255,255,255,.04);border-bottom:1px solid rgba(255,255,255,.06)}
+.category-scroll{display:flex;gap:8px;overflow:auto;scrollbar-width:none}
+.category-scroll::-webkit-scrollbar{display:none}
+.cat-btn{white-space:nowrap;border:1px solid var(--line);background:#0d0d13;color:#a9a9b3;padding:10px 14px;border-radius:999px;font-size:12px;font-weight:800;cursor:pointer}
+.cat-btn:hover,.cat-btn.active{color:#fff;border-color:rgba(192,132,252,.55);background:linear-gradient(90deg,rgba(124,58,237,.28),rgba(147,51,234,.18));box-shadow:0 0 18px rgba(139,92,246,.12)}
+
+.showcase-toolbar{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap;margin:0 0 22px}
+.search{flex:1;min-width:240px;height:42px;padding:0 14px;border-radius:12px;border:1px solid var(--line);background:#0d0d13;color:#fff;outline:none}
+.filter-row{display:flex;gap:7px;flex-wrap:wrap}
+.filter-btn{border:1px solid var(--line);background:#0d0d13;color:#9797a3;padding:9px 12px;border-radius:10px;font-size:11px;font-weight:850;cursor:pointer}
+.filter-btn.active,.filter-btn:hover{color:#fff;border-color:rgba(192,132,252,.45);background:#171722}
+
+.grid{columns:5 230px;column-gap:12px}
+.card{break-inside:avoid;margin:0 0 12px;position:relative;overflow:hidden;border-radius:16px;border:1px solid rgba(255,255,255,.07);background:#111118;cursor:pointer}
+.card-media{position:relative;min-height:220px;background:linear-gradient(135deg,#121224,#271044 55%,#0d1b2e);overflow:hidden}
+.card-media img,.card-media video{width:100%;display:block;object-fit:cover;transition:.35s}
+.card:hover .card-media img,.card:hover .card-media video{transform:scale(1.025);filter:brightness(.72)}
+.card-fallback{min-height:280px;display:grid;place-items:center;padding:30px;background:
+radial-gradient(circle at 20% 25%,rgba(59,130,246,.36),transparent 32%),
+radial-gradient(circle at 80% 20%,rgba(236,72,153,.36),transparent 30%),
+linear-gradient(135deg,#111124,#2b1050)}
+.card-fallback strong{font-size:26px;letter-spacing:-.04em;text-align:center}
+.card-overlay{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:15px;background:linear-gradient(transparent 32%,rgba(0,0,0,.92));opacity:0;transition:.25s}
+.card:hover .card-overlay{opacity:1}
+.card-title{font-size:13px;font-weight:900}
+.card-meta{font-size:11px;color:#ddd;margin:5px 0 10px}
+.card-actions{display:flex;gap:8px}
+.card-actions button{border:0;border-radius:9px;padding:8px 10px;font-size:11px;font-weight:900;cursor:pointer}
+.btn-view{background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.1)!important}
+.btn-use{background:#fff;color:#050505}
+.empty{padding:56px 20px;border:1px dashed rgba(255,255,255,.1);border-radius:18px;text-align:center;color:#8f8f99;background:#09090e}
+
+.creator-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.creator-card{min-height:210px;border:1px solid var(--line);background:
+radial-gradient(circle at 85% 20%,rgba(168,85,247,.20),transparent 35%),
+linear-gradient(145deg,#0b0b12,#11111c);border-radius:20px;padding:20px;display:flex;flex-direction:column;justify-content:space-between;cursor:pointer;transition:.25s}
+.creator-card:hover{transform:translateY(-3px);border-color:rgba(192,132,252,.42);box-shadow:0 16px 40px rgba(0,0,0,.28)}
+.creator-icon{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;background:rgba(139,92,246,.18);border:1px solid rgba(192,132,252,.22);font-size:20px}
+.creator-card h3{margin:18px 0 6px;font-size:18px}
+.creator-card p{margin:0;color:#9797a3;font-size:12px;line-height:1.5}
+.creator-go{margin-top:18px;font-size:11px;color:#d8b4fe;font-weight:900;letter-spacing:.1em}
+
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.step{border-top:1px solid rgba(192,132,252,.28);padding-top:18px}
+.step-num{color:#c084fc;font-size:12px;font-weight:900}
+.step h3{font-size:20px;margin:10px 0 8px}
+.step p{color:#90909b;font-size:13px;line-height:1.55;margin:0}
+
+.community{display:grid;grid-template-columns:1.2fr .8fr;gap:18px}
+.community-main,.community-links{border:1px solid var(--line);border-radius:22px;background:#0b0b11;padding:28px}
+.community-main h2{font-size:clamp(34px,4vw,58px);margin:8px 0 12px;letter-spacing:-.045em}
+.community-main p{color:#9a9aa5;line-height:1.65}
+.community-links{display:grid;gap:12px}
+.bio-link{display:flex;align-items:center;gap:12px;width:100%;padding:15px 14px;border-radius:14px;text-decoration:none;color:#fff;font-size:13px;font-weight:850;border:1px solid rgba(255,255,255,.08);transition:.2s}
+.bio-link:hover{transform:translateY(-1px);border-color:rgba(192,132,252,.42);box-shadow:0 0 20px rgba(139,92,246,.14)}
+.bio-link svg{width:20px;height:20px;flex:0 0 20px}
+.bio-link.whatsapp{background:rgba(31,41,35,.82)}
+.bio-link.telegram{background:rgba(17,32,49,.84)}
+
+.footer-big{padding:80px 0 26px;background:#030305;border-top:1px solid rgba(255,255,255,.06);overflow:hidden}
+.footer-word{font-size:clamp(82px,14vw,220px);font-weight:950;letter-spacing:-.08em;line-height:.8;color:rgba(255,255,255,.035);white-space:nowrap;user-select:none}
+.footer-row{display:flex;justify-content:space-between;align-items:center;gap:20px;margin-top:30px;color:#83838e;font-size:12px}
+.footer-links{display:flex;gap:16px;flex-wrap:wrap}
+.footer-links a:hover{color:#fff}
+
+.detail{position:fixed;inset:0;z-index:80;background:#efefed;color:#151515;display:none}
+.detail.open{display:grid;grid-template-columns:minmax(0,1fr) 455px}
+.viewer{position:relative;display:flex;align-items:center;justify-content:center;padding:46px 54px;background:radial-gradient(circle at 60% 40%,#e9ece6,#efefed 55%,#f7f7f5)}
+.viewer img,.viewer video{max-width:min(780px,72vw);max-height:88vh;border-radius:19px;box-shadow:0 20px 60px rgba(0,0,0,.08);object-fit:contain;background:#ddd}
+.viewer-tools{position:absolute;right:24px;top:16px;display:flex;gap:10px}
+.round{width:38px;height:38px;border-radius:999px;border:1px solid #ddd;background:#fff;cursor:pointer;font-weight:900}
+.panel{position:relative;background:#fff;border-left:1px solid #ddd;overflow:auto;padding:20px 18px 96px}
+.author{display:flex;align-items:center;gap:11px;padding:4px 0 14px;border-bottom:1px solid #eee}
+.avatar{width:38px;height:38px;border-radius:50%;background:#151515;color:#fff;display:grid;place-items:center;font-weight:900}
+.author-main{min-width:0;flex:1}.author-main b{display:block;font-size:15px}.author-main span{font-size:12px;color:#757575}
+.model-badge{font-size:12px;color:#555}
+.row-actions{display:flex;gap:20px;padding:15px 0;border-bottom:1px solid #eee;font-size:13px;color:#444}
+.row-actions button{border:0;background:transparent;cursor:pointer;color:#222;font-weight:750;padding:0}
+.prompt-label{font-size:12px;color:#777;font-weight:850;margin:18px 0 8px;letter-spacing:.03em}
+.prompt-text{font-size:14px;line-height:1.58;color:#303030;white-space:pre-wrap}
+.more{font-size:22px;margin:24px 0 12px}
+.related{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.related-card{min-height:170px;border-radius:13px;overflow:hidden;background:#eee;cursor:pointer}
+.related-card img{width:100%;height:190px;object-fit:cover}
+.related-fallback{height:190px;display:grid;place-items:center;padding:14px;text-align:center;background:linear-gradient(135deg,#1a1430,#3d166a);color:#fff;font-weight:800}
+.sticky-actions{position:fixed;right:0;bottom:0;width:455px;background:rgba(255,255,255,.96);backdrop-filter:blur(10px);border-top:1px solid #ddd;padding:12px 14px;display:flex;gap:10px}
+.sticky-actions button{flex:1;border:0;border-radius:11px;padding:14px 12px;font-weight:900;cursor:pointer}
+.use{background:#333;color:#fff}.generate{background:#111;color:#fff}
+
+.toast{position:fixed;right:22px;bottom:22px;z-index:120;background:rgba(18,18,22,.94);border:1px solid rgba(168,85,247,.4);padding:11px 14px;border-radius:10px;color:#e9d5ff;font-size:12px;display:none}
+.loading{padding:50px;text-align:center;color:#aaa}
+.spinner{width:28px;height:28px;border:3px solid rgba(255,255,255,.12);border-top-color:#c084fc;border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 12px}
+
 @keyframes heroZoom{from{transform:scale(1)}to{transform:scale(1.045)}}
-@media(max-width:900px){header{padding:0 20px;height:75px}.logo{width:145px}nav{display:none}.rail{display:none}.content{width:auto;margin:0;padding:110px 24px 150px}.hero-bg{object-position:58% center}.overlay{background:linear-gradient(90deg,rgba(0,0,0,.72),rgba(0,0,0,.48))}h1{font-size:clamp(52px,15vw,82px)}.desc{font-size:14px}.bio-links{position:absolute;right:18px;left:18px;bottom:58px;width:auto;display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:10px}.bio-label{grid-column:1/-1;margin-bottom:0}.bio-link{margin-top:0;justify-content:center;padding:10px 9px}.footer{bottom:12px;font-size:10px}}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+@media(max-width:1100px){
+  .creator-grid{grid-template-columns:repeat(2,1fr)}
+  .steps{grid-template-columns:repeat(2,1fr)}
+  .community{grid-template-columns:1fr}
+}
+@media(max-width:900px){
+  header{padding:0 20px;height:75px}.logo{width:145px}nav{display:none}.rail{display:none}
+  .content{width:auto;margin:0;padding:110px 24px 90px}
+  .hero-bg{object-position:58% center}.overlay{background:linear-gradient(90deg,rgba(0,0,0,.72),rgba(0,0,0,.48))}
+  h1{font-size:clamp(52px,15vw,82px)}.desc{font-size:14px}
+  .section{padding:70px 0}.section-head{display:block}.section-copy{margin-top:14px}
+  .detail.open{grid-template-columns:1fr;overflow:auto}.viewer{min-height:52vh;padding:54px 16px 16px}
+  .viewer img,.viewer video{max-width:92vw}.panel{border-left:0;overflow:visible}
+  .sticky-actions{width:100%}
+}
+@media(max-width:640px){
+  .wrap{width:min(100% - 28px,1480px)}
+  .creator-grid,.steps{grid-template-columns:1fr}
+  .footer-row{display:block}.footer-links{margin-top:14px}
+}
 </style>
 </head>
 <body>
-<section class="hero">
+
+<section class="hero" id="home">
   <img class="hero-bg" src="assets/hero-bg.png" alt="FadlyDats AI background">
   <div class="overlay"></div>
   <div class="glow"></div>
+
   <header>
-    <img class="logo" src="assets/fadlydats-logo.png" alt="FadlyDats">
+    <a href="#home"><img class="logo" src="assets/fadlydats-logo.png" alt="FadlyDats"></a>
     <nav>
-      <button class="active">HOME</button>
-      <button onclick="msg('Explore')">EXPLORE</button>
-      <button onclick="msg('Categories')">CATEGORIES</button>
-      <button onclick="msg('AI Creator')">AI CREATOR</button>
-      <button onclick="msg('Trending')">TRENDING</button>
+      <button class="active" onclick="goSection('home')">HOME</button>
+      <button onclick="goSection('showcase')">EXPLORE</button>
+      <button onclick="goSection('categories')">CATEGORIES</button>
+      <button onclick="goSection('ai-creator')">AI CREATOR</button>
+      <button onclick="loadCategory('recent');goSection('showcase')">TRENDING</button>
     </nav>
     <button class="top-btn" onclick="openGenerator()">GENERATE ✦</button>
   </header>
-  <aside class="rail"><div class="line"></div><div class="social"><span>IG</span><span>YT</span><span>X</span></div></aside>
+
+  <aside class="rail">
+    <div class="line"></div>
+    <div class="social">
+      <a href="https://www.instagram.com/" target="_blank">IG</a>
+      <a href="https://www.youtube.com/" target="_blank">YT</a>
+      <a href="https://x.com/" target="_blank">X</a>
+    </div>
+  </aside>
+
   <div class="content">
     <div class="eyebrow">DISCOVER AI PROMPTS.</div>
     <h1>CREATE<br>WITH <span class="purple">STYLE.</span></h1>
     <div class="track"><span class="a"></span><span class="dot"></span><span class="b"></span></div>
-    <div class="desc">Discover striking prompt ideas for images, videos, posters, and creative campaigns.<br>Open a concept, copy the prompt, and continue with the AI tool you prefer.<br>FadlyDats AI helps you explore, collect, and use prompts faster.</div>
-    <div class="ctas"><button class="cta-primary" onclick="openGenerator()">GENERATE AT EUTYCH →</button><button class="cta-secondary" onclick="msg('View Showcase')">▶ VIEW SHOWCASE</button></div>
+    <div class="desc">
+      Discover striking prompt ideas for images, videos, posters, and creative campaigns.<br>
+      Open a concept, copy the prompt, and continue with the AI tool you prefer.<br>
+      FadlyDats AI helps you explore, collect, and use prompts faster.
+    </div>
+    <div class="ctas">
+      <button class="cta-primary" onclick="openGenerator()">GENERATE AT EUTYCH →</button>
+      <button class="cta-secondary" onclick="goSection('showcase')">▶ VIEW SHOWCASE</button>
+    </div>
   </div>
-  <div class="bio-links" aria-label="Ambil prompt">
-    <div class="bio-label">AMBIL PROMPT & UPDATE</div>
-    <a class="bio-link whatsapp" href="https://whatsapp.com/channel/0029VbDhbi0HgZWUO1ciLJ1u" target="_blank" rel="noopener noreferrer">
-      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2a9.84 9.84 0 0 0-8.45 14.88L2 22l5.25-1.53A9.98 9.98 0 1 0 12.04 2Zm0 17.96a8.06 8.06 0 0 1-4.1-1.12l-.29-.17-3.12.91.93-3.04-.19-.31a7.91 7.91 0 1 1 6.77 3.73Zm4.36-5.93c-.24-.12-1.41-.69-1.63-.77-.22-.08-.38-.12-.54.12-.16.24-.62.77-.76.93-.14.16-.28.18-.52.06-.24-.12-1.01-.37-1.93-1.19-.71-.63-1.19-1.42-1.33-1.66-.14-.24-.01-.37.1-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.3-.74-1.78-.2-.47-.39-.4-.54-.41h-.46c-.16 0-.42.06-.64.3-.22.24-.84.82-.84 2s.86 2.32.98 2.48c.12.16 1.69 2.58 4.09 3.62.57.25 1.02.39 1.37.5.58.18 1.1.16 1.51.1.46-.07 1.41-.58 1.61-1.13.2-.56.2-1.03.14-1.13-.06-.1-.22-.16-.46-.28Z"/></svg>
-      <span>WhatsApp Channel</span>
-    </a>
-    <a class="bio-link telegram" href="https://t.me/NocturaAI_Bot" target="_blank" rel="noopener noreferrer">
-      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m21.94 4.66-3.03 14.29c-.23 1.01-.83 1.26-1.68.78l-4.61-3.4-2.23 2.15c-.25.25-.45.45-.93.45l.33-4.69 8.54-7.72c.37-.33-.08-.52-.58-.19L7.2 12.98 2.65 11.56c-.99-.31-1.01-.99.21-1.47L20.66 3.2c.83-.3 1.55.19 1.28 1.46Z"/></svg>
-      <span>Telegram Bot</span>
-    </a>
-  </div>
-  <footer class="footer">© 2026 Fadlydats. Seluruh hak dilindungi.</footer>
 </section>
+
+<div class="category-bar" id="categories">
+  <div class="wrap">
+    <div class="category-scroll" id="categoryButtons"></div>
+  </div>
+</div>
+
+<section class="section dark" id="showcase">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="section-kicker">Prompt Showcase</div>
+        <h2 class="section-title" id="showcaseTitle">Recent Inspirations</h2>
+      </div>
+      <p class="section-copy">Klik sebuah karya untuk membuka prompt lengkap. Copy prompt atau lanjutkan ke Eutych untuk membuat hasil serupa.</p>
+    </div>
+
+    <div class="showcase-toolbar">
+      <input id="searchInput" class="search" placeholder="Cari prompt, model, kategori..." oninput="renderCurrent()">
+      <div class="filter-row">
+        <button class="filter-btn active" data-sort="featured" onclick="setSort('featured',this)">Featured</button>
+        <button class="filter-btn" data-sort="newest" onclick="setSort('newest',this)">Newest</button>
+        <button class="filter-btn" data-sort="popular" onclick="setSort('popular',this)">Popular</button>
+      </div>
+    </div>
+
+    <div id="showcaseGrid" class="grid"></div>
+  </div>
+</section>
+
+<section class="section alt" id="ai-creator">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="section-kicker">AI Creator</div>
+        <h2 class="section-title">Pilih jenis prompt yang ingin dibuat.</h2>
+      </div>
+      <p class="section-copy">Bagian ini berbeda dari showcase biasa. Pengunjung memilih kebutuhan prompt, melihat contoh, lalu diarahkan ke generator setelah memilih Use Prompt.</p>
+    </div>
+
+    <div class="creator-grid">
+      <div class="creator-card" onclick="loadCategory('product');goSection('showcase')"><div><div class="creator-icon">◫</div><h3>Product Creator</h3><p>Prompt iklan produk, packshot, lifestyle, campaign, dan commercial visual.</p></div><div class="creator-go">EXPLORE →</div></div>
+      <div class="creator-card" onclick="loadCategory('photograph');goSection('showcase')"><div><div class="creator-icon">◉</div><h3>Portrait Creator</h3><p>Prompt portrait editorial, beauty, fashion, studio, dan creator content.</p></div><div class="creator-go">EXPLORE →</div></div>
+      <div class="creator-card" onclick="loadCategory('videos');goSection('showcase')"><div><div class="creator-icon">▶</div><h3>Video Creator</h3><p>Prompt video cinematic, advertising, movement, shot design, dan storytelling.</p></div><div class="creator-go">EXPLORE →</div></div>
+      <div class="creator-card" onclick="loadCategory('logo');goSection('showcase')"><div><div class="creator-icon">◇</div><h3>Logo Creator</h3><p>Prompt logo, identitas brand, emblem, monogram, dan visual identity.</p></div><div class="creator-go">EXPLORE →</div></div>
+      <div class="creator-card" onclick="loadCategory('design');goSection('showcase')"><div><div class="creator-icon">▣</div><h3>Poster Creator</h3><p>Prompt poster, key visual, editorial design, social media campaign, dan layout.</p></div><div class="creator-go">EXPLORE →</div></div>
+      <div class="creator-card" onclick="loadCategory('3d');goSection('showcase')"><div><div class="creator-icon">⬡</div><h3>3D Creator</h3><p>Prompt 3D illustration, stylized object, product render, dan character visual.</p></div><div class="creator-go">EXPLORE →</div></div>
+      <div class="creator-card" onclick="loadCategory('storyboard');goSection('showcase')"><div><div class="creator-icon">☷</div><h3>Storyboard Creator</h3><p>Prompt shot-by-shot, character continuity, visual story, dan cinematic sequence.</p></div><div class="creator-go">EXPLORE →</div></div>
+      <div class="creator-card" onclick="loadCategory('wallpaper');goSection('showcase')"><div><div class="creator-icon">✦</div><h3>Wallpaper Creator</h3><p>Prompt wallpaper desktop/mobile, cinematic scene, abstract, dan aesthetic art.</p></div><div class="creator-go">EXPLORE →</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section dark">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="section-kicker">How It Works</div>
+        <h2 class="section-title">Find the prompt. Create anywhere.</h2>
+      </div>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="step-num">01</div><h3>Discover</h3><p>Jelajahi showcase berdasarkan kategori atau prompt terbaru.</p></div>
+      <div class="step"><div class="step-num">02</div><h3>Open Prompt</h3><p>Klik karya untuk melihat detail visual, model AI, dan prompt lengkap.</p></div>
+      <div class="step"><div class="step-num">03</div><h3>Copy / Use</h3><p>Salin prompt atau pilih Use Prompt dari halaman detail.</p></div>
+      <div class="step"><div class="step-num">04</div><h3>Generate</h3><p>Lanjutkan ke Eutych untuk membuat gambar atau video dengan prompt tersebut.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section alt" id="community">
+  <div class="wrap community">
+    <div class="community-main">
+      <div class="section-kicker">Prompt Updates</div>
+      <h2>Ambil prompt baru dari komunitas.</h2>
+      <p>Ikuti WhatsApp Channel atau Telegram untuk menerima inspirasi prompt, update, dan link terbaru.</p>
+    </div>
+    <div class="community-links">
+      <a class="bio-link whatsapp" href="https://whatsapp.com/channel/0029VbDhbi0HgZWUO1ciLJ1u" target="_blank" rel="noopener noreferrer">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2a9.84 9.84 0 0 0-8.45 14.88L2 22l5.25-1.53A9.98 9.98 0 1 0 12.04 2Zm0 17.96a8.06 8.06 0 0 1-4.1-1.12l-.29-.17-3.12.91.93-3.04-.19-.31a7.91 7.91 0 1 1 6.77 3.73Zm4.36-5.93c-.24-.12-1.41-.69-1.63-.77-.22-.08-.38-.12-.54.12-.16.24-.62.77-.76.93-.14.16-.28.18-.52.06-.24-.12-1.01-.37-1.93-1.19-.71-.63-1.19-1.42-1.33-1.66-.14-.24-.01-.37.1-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.3-.74-1.78-.2-.47-.39-.4-.54-.41h-.46c-.16 0-.42.06-.64.3-.22.24-.84.82-.84 2s.86 2.32.98 2.48c.12.16 1.69 2.58 4.09 3.62.57.25 1.02.39 1.37.5.58.18 1.1.16 1.51.1.46-.07 1.41-.58 1.61-1.13.2-.56.2-1.03.14-1.13-.06-.1-.22-.16-.46-.28Z"/></svg>
+        <span>WhatsApp Channel</span>
+      </a>
+      <a class="bio-link telegram" href="https://t.me/NocturaAI_Bot" target="_blank" rel="noopener noreferrer">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="m21.94 4.66-3.03 14.29c-.23 1.01-.83 1.26-1.68.78l-4.61-3.4-2.23 2.15c-.25.25-.45.45-.93.45l.33-4.69 8.54-7.72c.37-.33-.08-.52-.58-.19L7.2 12.98 2.65 11.56c-.99-.31-1.01-.99.21-1.47L20.66 3.2c.83-.3 1.55.19 1.28 1.46Z"/></svg>
+        <span>Telegram Bot</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer-big">
+  <div class="wrap">
+    <div class="footer-word">FADLYDATS</div>
+    <div class="footer-row">
+      <div>© 2026 Fadlydats. Seluruh hak dilindungi.</div>
+      <div class="footer-links">
+        <a href="#showcase">Explore</a>
+        <a href="#categories">Categories</a>
+        <a href="#ai-creator">AI Creator</a>
+        <a href="#community">Community</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<section class="detail" id="detail">
+  <div class="viewer">
+    <div class="viewer-tools"><button class="round" onclick="closeDetail()">×</button></div>
+    <div id="detailMedia"></div>
+  </div>
+  <aside class="panel">
+    <div class="author">
+      <div class="avatar">F</div>
+      <div class="author-main"><b id="creator">FadlyDats AI</b><span id="detailCategory">Prompt Creator</span></div>
+      <div class="model-badge" id="detailModel">GPT Image</div>
+    </div>
+    <div class="row-actions"><span>♡ <b id="detailLikes">0</b></span><button onclick="copyPrompt()">⧉ Copy Prompt</button></div>
+    <div class="prompt-label">PROMPT</div>
+    <div class="prompt-text" id="detailPrompt"></div>
+    <h3 class="more">More like this</h3>
+    <div class="related" id="related"></div>
+  </aside>
+  <div class="sticky-actions">
+    <button class="use" onclick="copyPrompt()">↻ &nbsp; Use Prompt</button>
+    <button class="generate" onclick="usePrompt()">✧ &nbsp; Generate</button>
+  </div>
+</section>
+
 <div id="toast" class="toast"></div>
-<script>const GENERATOR_URL='https://eutych.com/';function openGenerator(){window.open(GENERATOR_URL,'_blank','noopener,noreferrer')}function msg(t){const el=document.getElementById('toast');el.textContent=t+' — section/link can be connected next.';el.style.display='block';clearTimeout(window.__t);window.__t=setTimeout(()=>el.style.display='none',1800)}</script>
+
+<script>
+const CONFIG = {
+  WORKER_BASE: 'https://fadlydats-showcase-api.storyquotes15.workers.dev',
+  GENERATOR_URL: 'https://eutych.com/',
+  PASS_PROMPT_IN_URL: false
+};
+
+const CATEGORY_LABELS = {
+  recent:'Recent',
+  product:'Ads & Product',
+  logo:'Brand & Logo',
+  videos:'Videos',
+  '3d':'Illustration & 3D',
+  design:'Posters & Visuals',
+  photograph:'Portraits',
+  storyboard:'Storyboard & Characters',
+  wallpaper:'Wallpaper'
+};
+
+const DEMO_ITEMS = {
+  recent:[
+    {id:'demo-1',title:'Luxury Product Campaign',category:'Ads & Product',model:'GPT Image',creator:'FadlyDats AI',likes:128,prompt:'Create a premium commercial product campaign with cinematic studio lighting, detailed reflections, elegant composition, dramatic depth, high-end advertising photography and clean brand presentation.',featured:true,newest:true,popular:true},
+    {id:'demo-2',title:'Editorial Portrait',category:'Portraits',model:'GPT Image',creator:'FadlyDats AI',likes:94,prompt:'Create an ultra-realistic editorial portrait with natural skin detail, sophisticated studio lighting, clean fashion styling, realistic depth of field and premium magazine campaign aesthetics.',featured:true,newest:true,popular:false},
+    {id:'demo-3',title:'Cinematic Video Story',category:'Videos',model:'Seedance',creator:'FadlyDats AI',likes:76,prompt:'Create a cinematic tracking shot with controlled camera movement, realistic lighting changes, atmospheric depth, natural subject motion, detailed environment and premium film color grading.',featured:true,newest:false,popular:true}
+  ]
+};
+
+let currentCategory='recent';
+let currentItems=[];
+let activeItem=null;
+let currentSort='featured';
+
+function goSection(id){
+  document.getElementById(id)?.scrollIntoView({behavior:'smooth'});
+}
+
+function openGenerator(){
+  window.open(CONFIG.GENERATOR_URL,'_blank','noopener,noreferrer');
+}
+
+function usePrompt(){
+  if(!activeItem){openGenerator();return}
+  let url=CONFIG.GENERATOR_URL;
+  if(CONFIG.PASS_PROMPT_IN_URL && activeItem.prompt){
+    url += (url.includes('?')?'&':'?')+'prompt='+encodeURIComponent(activeItem.prompt);
+  }
+  window.open(url,'_blank','noopener,noreferrer');
+}
+
+function msg(t){
+  const el=document.getElementById('toast');
+  el.textContent=t;
+  el.style.display='block';
+  clearTimeout(window.__t);
+  window.__t=setTimeout(()=>el.style.display='none',1800)
+}
+
+function buildCategories(){
+  const wrap=document.getElementById('categoryButtons');
+  Object.entries(CATEGORY_LABELS).forEach(([id,label])=>{
+    const b=document.createElement('button');
+    b.className='cat-btn'+(id===currentCategory?' active':'');
+    b.textContent=label;
+    b.dataset.category=id;
+    b.onclick=()=>loadCategory(id);
+    wrap.appendChild(b);
+  });
+}
+
+async function loadCategory(category){
+  currentCategory=category;
+  document.querySelectorAll('.cat-btn').forEach(b=>b.classList.toggle('active',b.dataset.category===category));
+  document.getElementById('showcaseTitle').textContent=CATEGORY_LABELS[category] || category;
+  const grid=document.getElementById('showcaseGrid');
+  grid.className='';
+  grid.innerHTML='<div class="loading"><div class="spinner"></div>Loading showcase...</div>';
+
+  try{
+    const res=await fetch(CONFIG.WORKER_BASE+'/showcase?category='+encodeURIComponent(category),{cache:'no-store'});
+    const data=await res.json();
+    currentItems=Array.isArray(data.items)?data.items:[];
+  }catch(e){
+    currentItems=[];
+  }
+
+  if(!currentItems.length){
+    currentItems=(DEMO_ITEMS[category]||DEMO_ITEMS.recent||[]).map((x,i)=>({...x,id:x.id||category+'-'+i}));
+  }
+  renderCurrent();
+}
+
+function setSort(sort,el){
+  currentSort=sort;
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active');
+  renderCurrent();
+}
+
+function normalizeItem(x,i){
+  return {
+    id:x.id || `${currentCategory}-${i}`,
+    title:x.title || x.name || 'Untitled Prompt',
+    image:x.image || x.imageUrl || x.thumbnail || '',
+    video:x.video || x.videoUrl || '',
+    category:x.category || CATEGORY_LABELS[currentCategory] || currentCategory,
+    model:x.model || x.aiModel || 'AI',
+    prompt:x.prompt || x.description || '',
+    creator:x.creator || 'FadlyDats AI',
+    likes:Number(x.likes || 0),
+    featured:Boolean(x.featured),
+    newest:Boolean(x.newest),
+    popular:Boolean(x.popular),
+    destinationUrl:x.generateUrl || x.destinationUrl || CONFIG.GENERATOR_URL
+  }
+}
+
+function renderCurrent(){
+  const q=(document.getElementById('searchInput').value||'').toLowerCase().trim();
+  let items=currentItems.map(normalizeItem).filter(x=>{
+    if(!q)return true;
+    return (x.title+' '+x.prompt+' '+x.category+' '+x.model).toLowerCase().includes(q);
+  });
+
+  if(currentSort==='popular') items.sort((a,b)=>b.likes-a.likes);
+  if(currentSort==='featured') items.sort((a,b)=>(b.featured?1:0)-(a.featured?1:0));
+  if(currentSort==='newest') items.sort((a,b)=>(b.newest?1:0)-(a.newest?1:0));
+
+  const grid=document.getElementById('showcaseGrid');
+  grid.className='grid';
+  grid.innerHTML='';
+  if(!items.length){
+    grid.className='';
+    grid.innerHTML='<div class="empty">Belum ada data showcase untuk kategori ini. Tambahkan item di Worker, lalu data akan muncul otomatis di sini.</div>';
+    return;
+  }
+
+  items.forEach(item=>{
+    const card=document.createElement('article');
+    card.className='card';
+    const media=item.video
+      ? `<div class="card-media"><video src="${escAttr(item.video)}" muted loop playsinline onmouseenter="this.play()" onmouseleave="this.pause();this.currentTime=0"></video></div>`
+      : item.image
+        ? `<div class="card-media"><img loading="lazy" src="${escAttr(item.image)}" alt="${escAttr(item.title)}"></div>`
+        : `<div class="card-media card-fallback"><strong>${escHtml(item.title)}</strong></div>`;
+
+    card.innerHTML=media+`
+      <div class="card-overlay">
+        <div class="card-title">${escHtml(item.title)}</div>
+        <div class="card-meta">${escHtml(item.category)} · ${escHtml(item.model)}</div>
+        <div class="card-actions">
+          <button class="btn-view">View Prompt</button>
+          <button class="btn-use">Use Prompt</button>
+        </div>
+      </div>`;
+
+    card.onclick=()=>openDetail(item);
+    card.querySelector('.btn-view').onclick=e=>{e.stopPropagation();openDetail(item)};
+    card.querySelector('.btn-use').onclick=e=>{e.stopPropagation();activeItem=item;usePrompt()};
+    grid.appendChild(card);
+  });
+}
+
+function openDetail(item){
+  activeItem=item;
+  document.getElementById('creator').textContent=item.creator||'FadlyDats AI';
+  document.getElementById('detailCategory').textContent=item.category||'Prompt';
+  document.getElementById('detailModel').textContent=item.model||'AI';
+  document.getElementById('detailLikes').textContent=item.likes||0;
+  document.getElementById('detailPrompt').textContent=item.prompt||'Prompt belum tersedia.';
+
+  const media=document.getElementById('detailMedia');
+  if(item.video){
+    media.innerHTML=`<video src="${escAttr(item.video)}" controls autoplay muted loop playsinline></video>`;
+  }else if(item.image){
+    media.innerHTML=`<img src="${escAttr(item.image)}" alt="${escAttr(item.title)}">`;
+  }else{
+    media.innerHTML=`<div style="width:min(720px,80vw);height:60vh;border-radius:20px;display:grid;place-items:center;background:linear-gradient(135deg,#15152c,#43146e);color:#fff;font-size:42px;font-weight:900;padding:30px;text-align:center">${escHtml(item.title)}</div>`;
+  }
+
+  const rel=document.getElementById('related');
+  rel.innerHTML='';
+  currentItems.map(normalizeItem).filter(x=>x.id!==item.id).slice(0,4).forEach(x=>{
+    const d=document.createElement('div');
+    d.className='related-card';
+    if(x.image){
+      d.innerHTML=`<img src="${escAttr(x.image)}" alt="${escAttr(x.title)}">`;
+    }else{
+      d.innerHTML=`<div class="related-fallback">${escHtml(x.title)}</div>`;
+    }
+    d.onclick=()=>openDetail(x);
+    rel.appendChild(d);
+  });
+
+  document.getElementById('detail').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+
+function closeDetail(){
+  document.getElementById('detail').classList.remove('open');
+  document.body.style.overflow='';
+}
+
+async function copyPrompt(){
+  if(!activeItem?.prompt){msg('Prompt belum tersedia.');return}
+  try{
+    await navigator.clipboard.writeText(activeItem.prompt);
+    msg('Prompt berhasil disalin.');
+  }catch(e){
+    msg('Tidak bisa copy otomatis.');
+  }
+}
+
+function escHtml(s=''){
+  const d=document.createElement('div');d.textContent=s;return d.innerHTML;
+}
+function escAttr(s=''){
+  return String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeDetail()});
+buildCategories();
+loadCategory('recent');
+</script>
+
 </body>
 </html>
