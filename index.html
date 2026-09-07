@@ -161,6 +161,175 @@ linear-gradient(135deg,#111124,#2b1050)}
   .wrap{width:min(100% - 28px,1480px)}
   .footer-row{display:block}.footer-links{margin-top:14px}
 }
+
+/* ===== FADLYDATS HERO V2 ===== */
+.hero-copy{
+  position:relative;
+  z-index:3;
+  width:min(900px,64vw);
+  margin-left:9vw;
+  padding-top:74px;
+}
+
+.hero-small-title{
+  display:block;
+  margin:0 0 16px;
+  font-size:clamp(20px,2.15vw,34px);
+  line-height:1;
+  font-weight:650;
+  letter-spacing:.34em;
+  text-transform:uppercase;
+  color:#fff;
+  text-shadow:0 5px 28px rgba(0,0,0,.72);
+}
+
+.hero-main-title{
+  margin:0;
+  max-width:950px;
+  font-size:clamp(70px,8.3vw,132px);
+  line-height:.82;
+  letter-spacing:-.07em;
+  font-weight:950;
+  color:#fff;
+  text-shadow:0 6px 34px rgba(0,0,0,.48);
+}
+
+.hero-main-title .accent-word{
+  background:linear-gradient(100deg,#fff 0%,#e9d5ff 18%,#c084fc 48%,#8b5cf6 78%,#7c3aed 100%);
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+  filter:drop-shadow(0 0 28px rgba(168,85,247,.22));
+}
+
+.hero-track{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin:31px 0 25px;
+}
+
+.hero-track .line-purple{
+  width:76px;
+  height:3px;
+  border-radius:20px;
+  background:linear-gradient(90deg,#d946ef,#8b5cf6);
+  box-shadow:0 0 13px rgba(168,85,247,.88);
+}
+
+.hero-track .line-dot{
+  width:5px;
+  height:5px;
+  border-radius:50%;
+  background:#fff;
+  box-shadow:0 0 9px rgba(255,255,255,.55);
+}
+
+.hero-track .line-muted{
+  width:98px;
+  height:1px;
+  background:rgba(255,255,255,.18);
+}
+
+.hero-description{
+  max-width:610px;
+  margin:0;
+  color:#d6d6dc;
+  font-size:15px;
+  line-height:1.75;
+  text-shadow:0 2px 15px rgba(0,0,0,.82);
+}
+
+.hero-buttons{
+  display:flex;
+  align-items:center;
+  gap:13px;
+  flex-wrap:wrap;
+  margin-top:31px;
+}
+
+.hero-btn-primary,
+.hero-btn-secondary{
+  min-height:49px;
+  border-radius:10px;
+  padding:0 23px;
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:.12em;
+  cursor:pointer;
+  transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease,background .25s ease;
+}
+
+.hero-btn-primary{
+  color:#fff;
+  border:none;
+  background:linear-gradient(100deg,#7c3aed,#9333ea,#a855f7);
+  box-shadow:0 10px 30px rgba(124,58,237,.28),0 0 24px rgba(168,85,247,.18);
+}
+
+.hero-btn-primary:hover{
+  transform:translateY(-2px);
+  box-shadow:0 15px 40px rgba(124,58,237,.36),0 0 32px rgba(168,85,247,.30);
+}
+
+.hero-btn-secondary{
+  color:#fff;
+  border:1px solid rgba(255,255,255,.25);
+  background:rgba(5,5,10,.58);
+  backdrop-filter:blur(12px);
+}
+
+.hero-btn-secondary:hover{
+  transform:translateY(-2px);
+  border-color:rgba(192,132,252,.72);
+  background:rgba(15,10,24,.72);
+}
+
+@media(max-width:900px){
+  .hero-copy{
+    width:auto;
+    margin-left:0;
+    padding:118px 24px 96px;
+  }
+
+  .hero-small-title{
+    font-size:18px;
+    letter-spacing:.23em;
+    margin-bottom:14px;
+  }
+
+  .hero-main-title{
+    font-size:clamp(62px,17vw,94px);
+    line-height:.84;
+  }
+
+  .hero-description{
+    max-width:500px;
+    font-size:14px;
+  }
+
+  .hero-buttons{
+    margin-top:26px;
+  }
+}
+
+@media(max-width:560px){
+  .hero-main-title{
+    font-size:clamp(54px,18vw,78px);
+  }
+
+  .hero-small-title{
+    font-size:16px;
+  }
+
+  .hero-btn-primary,
+  .hero-btn-secondary{
+    min-height:46px;
+    padding:0 18px;
+    font-size:10px;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -190,16 +359,32 @@ linear-gradient(135deg,#111124,#2b1050)}
     </div>
   </aside>
 
-  <div class="content">
-    <h1>THE NEW ERA<span class="purple"> OF AI VIDEO.</span></h1>
-    <div class="track"><span class="a"></span><span class="dot"></span><span class="b"></span></div>
-    <div class="desc">
-      Yang Suka Beking gambar/video ai silahkan ambe depe Prompt neh. 
-      nda usah malo malo, deng kalo suka gabung Whatsapp channel/Telegram 
+  <div class="content hero-copy">
+    <div class="hero-small-title">THE NEW ERA</div>
+
+    <h1 class="hero-main-title">
+      OF AI <span class="accent-word">VIDEO.</span>
+    </h1>
+
+    <div class="hero-track" aria-hidden="true">
+      <span class="line-purple"></span>
+      <span class="line-dot"></span>
+      <span class="line-muted"></span>
     </div>
-    <div class="ctas">
-      <button class="cta-primary" onclick="openGenerator()">Generate →</button>
-      <button class="cta-secondary" onclick="goSection('showcase')">▶ VIEW SHOWCASE</button>
+
+    <p class="hero-description">
+      Temukan prompt AI pilihan untuk gambar dan video. Salin prompt, eksplorasi idenya,
+      lalu lanjutkan ke Eutych untuk membuat versi kamu sendiri.
+    </p>
+
+    <div class="hero-buttons">
+      <button class="hero-btn-primary" onclick="goSection('showcase')">
+        EXPLORE PROMPTS →
+      </button>
+
+      <button class="hero-btn-secondary" onclick="openGenerator()">
+        GENERATE ✦
+      </button>
     </div>
   </div>
 </section>
