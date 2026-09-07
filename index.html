@@ -94,21 +94,7 @@ linear-gradient(135deg,#111124,#2b1050)}
 .btn-use{background:#fff;color:#050505}
 .empty{padding:56px 20px;border:1px dashed rgba(255,255,255,.1);border-radius:18px;text-align:center;color:#8f8f99;background:#09090e}
 
-.creator-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-.creator-card{min-height:210px;border:1px solid var(--line);background:
-radial-gradient(circle at 85% 20%,rgba(168,85,247,.20),transparent 35%),
-linear-gradient(145deg,#0b0b12,#11111c);border-radius:20px;padding:20px;display:flex;flex-direction:column;justify-content:space-between;cursor:pointer;transition:.25s}
-.creator-card:hover{transform:translateY(-3px);border-color:rgba(192,132,252,.42);box-shadow:0 16px 40px rgba(0,0,0,.28)}
-.creator-icon{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;background:rgba(139,92,246,.18);border:1px solid rgba(192,132,252,.22);font-size:20px}
-.creator-card h3{margin:18px 0 6px;font-size:18px}
-.creator-card p{margin:0;color:#9797a3;font-size:12px;line-height:1.5}
-.creator-go{margin-top:18px;font-size:11px;color:#d8b4fe;font-weight:900;letter-spacing:.1em}
 
-.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-.step{border-top:1px solid rgba(192,132,252,.28);padding-top:18px}
-.step-num{color:#c084fc;font-size:12px;font-weight:900}
-.step h3{font-size:20px;margin:10px 0 8px}
-.step p{color:#90909b;font-size:13px;line-height:1.55;margin:0}
 
 .community{display:grid;grid-template-columns:1.2fr .8fr;gap:18px}
 .community-main,.community-links{border:1px solid var(--line);border-radius:22px;background:#0b0b11;padding:28px}
@@ -159,8 +145,6 @@ linear-gradient(145deg,#0b0b12,#11111c);border-radius:20px;padding:20px;display:
 @keyframes spin{to{transform:rotate(360deg)}}
 
 @media(max-width:1100px){
-  .creator-grid{grid-template-columns:repeat(2,1fr)}
-  .steps{grid-template-columns:repeat(2,1fr)}
   .community{grid-template-columns:1fr}
 }
 @media(max-width:900px){
@@ -175,7 +159,6 @@ linear-gradient(145deg,#0b0b12,#11111c);border-radius:20px;padding:20px;display:
 }
 @media(max-width:640px){
   .wrap{width:min(100% - 28px,1480px)}
-  .creator-grid,.steps{grid-template-columns:1fr}
   .footer-row{display:block}.footer-links{margin-top:14px}
 }
 </style>
@@ -193,7 +176,6 @@ linear-gradient(145deg,#0b0b12,#11111c);border-radius:20px;padding:20px;display:
       <button class="active" onclick="goSection('home')">HOME</button>
       <button onclick="goSection('showcase')">EXPLORE</button>
       <button onclick="goSection('categories')">CATEGORIES</button>
-      <button onclick="goSection('ai-creator')">AI CREATOR</button>
       <button onclick="loadCategory('recent');goSection('showcase')">TRENDING</button>
     </nav>
     <button class="top-btn" onclick="openGenerator()">GENERATE ✦</button>
@@ -229,6 +211,30 @@ linear-gradient(145deg,#0b0b12,#11111c);border-radius:20px;padding:20px;display:
     <div class="category-scroll" id="categoryButtons"></div>
   </div>
 </div>
+
+<section class="section dark" id="showcase">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="section-kicker">Prompt Showcase</div>
+        <h2 class="section-title" id="showcaseTitle">Recent Inspirations</h2>
+      </div>
+      <p class="section-copy">Klik sebuah karya untuk membuka prompt lengkap. Copy prompt atau lanjutkan ke Eutych untuk membuat hasil serupa.</p>
+    </div>
+
+    <div class="showcase-toolbar">
+      <input id="searchInput" class="search" placeholder="Cari prompt, model, kategori..." oninput="renderCurrent()">
+      <div class="filter-row">
+        <button class="filter-btn active" data-sort="featured" onclick="setSort('featured',this)">Featured</button>
+        <button class="filter-btn" data-sort="newest" onclick="setSort('newest',this)">Newest</button>
+        <button class="filter-btn" data-sort="popular" onclick="setSort('popular',this)">Popular</button>
+      </div>
+    </div>
+
+    <div id="showcaseGrid" class="grid"></div>
+  </div>
+</section>
+
 <section class="section alt" id="community">
   <div class="wrap community">
     <div class="community-main">
@@ -257,7 +263,6 @@ linear-gradient(145deg,#0b0b12,#11111c);border-radius:20px;padding:20px;display:
       <div class="footer-links">
         <a href="#showcase">Explore</a>
         <a href="#categories">Categories</a>
-        <a href="#ai-creator">AI Creator</a>
         <a href="#community">Community</a>
       </div>
     </div>
@@ -357,10 +362,10 @@ async function loadCategory(category){
   document.getElementById('showcaseTitle').textContent=CATEGORY_LABELS[category] || category;
   const grid=document.getElementById('showcaseGrid');
   grid.className='';
-  grid.innerHTML='<div class="loading"><div class="spinner"></div>Loading showcase...</div>';
+  grid.innerHTML='<div class="loading"><div class="spinner"></div>Memuat semua showcase...</div>';
 
   try{
-    const res=await fetch(CONFIG.WORKER_BASE+'/showcase?category='+encodeURIComponent(category),{cache:'no-store'});
+    const res=await fetch(CONFIG.WORKER_BASE+'/showcase?category='+encodeURIComponent(category)+'&all=1',{cache:'no-store'});
     const data=await res.json();
     if(!res.ok || data.ok === false){
       throw new Error(data.error || 'Worker request failed');
@@ -415,7 +420,7 @@ function renderCurrent(){
   grid.innerHTML='';
   if(!items.length){
     grid.className='';
-    grid.innerHTML='<div class="empty">Belum ada item yang berhasil diambil untuk kategori ini. Cek Worker atau sumber kategori.</div>';
+    grid.innerHTML='<div class="empty">Belum ada data untuk kategori ini.</div>';
     return;
   }
 
