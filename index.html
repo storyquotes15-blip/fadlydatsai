@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>FadlyDats AI</title>
+<style>
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:Arial,Helvetica,sans-serif;background:#030306;color:#fff}body{overflow-x:hidden}
+.hero{position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden;background:#050507}
+.hero-bg{position:absolute;inset:-3%;width:106%;height:106%;object-fit:cover;object-position:center;filter:saturate(1.08);animation:heroZoom 18s ease-in-out infinite alternate}
+.overlay{position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.78) 0%,rgba(0,0,0,.52) 28%,rgba(0,0,0,.36) 55%,rgba(0,0,0,.68) 100%)}
+.glow{position:absolute;inset:0;background:radial-gradient(circle at 16% 55%,rgba(37,99,235,.22),transparent 30%),radial-gradient(circle at 82% 22%,rgba(236,72,153,.20),transparent 25%),radial-gradient(circle at 69% 60%,rgba(139,92,246,.17),transparent 28%)}
+header{position:absolute;z-index:5;top:0;left:0;right:0;height:88px;display:flex;align-items:center;justify-content:space-between;padding:0 54px;background:linear-gradient(to bottom,rgba(0,0,0,.42),transparent)}
+.logo{width:190px;height:auto;display:block;filter:drop-shadow(0 0 18px rgba(139,92,246,.34))}
+nav{display:flex;gap:36px;align-items:center}nav button{background:none;border:none;color:#aaa;font-weight:700;font-size:12px;letter-spacing:.15em;cursor:pointer}nav button.active,nav button:hover{color:#fff}
+.top-btn{border:1px solid rgba(192,132,252,.5);background:rgba(5,5,8,.6);color:#fff;border-radius:10px;padding:12px 16px;font-weight:800;cursor:pointer;box-shadow:0 0 20px rgba(139,92,246,.12)}
+.content{position:relative;z-index:3;width:min(760px,58vw);margin-left:11vw;padding-top:70px}
+.eyebrow{font-size:14px;letter-spacing:.24em;color:#e879f9;font-weight:800;margin-bottom:16px;text-transform:uppercase}
+h1{font-size:clamp(54px,7.5vw,106px);line-height:.91;letter-spacing:-.055em;margin:0;font-weight:900;text-shadow:0 4px 30px rgba(0,0,0,.4)}
+h1 .purple{background:linear-gradient(90deg,#f0abfc,#c084fc,#8b5cf6);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 22px rgba(168,85,247,.28))}
+.track{display:flex;align-items:center;gap:7px;margin:26px 0 28px}.track .a{height:2px;width:80px;background:linear-gradient(90deg,#d946ef,#a855f7);box-shadow:0 0 10px #a855f7}.track .dot{width:4px;height:4px;border-radius:50%;background:#fff}.track .b{height:1px;width:100px;background:#333}
+.desc{max-width:620px;color:#d4d4d8;line-height:1.65;font-size:16px;text-shadow:0 2px 12px rgba(0,0,0,.65)}
+.ctas{display:flex;gap:14px;margin-top:30px;flex-wrap:wrap}.cta-primary,.cta-secondary{border-radius:10px;padding:15px 23px;font-size:12px;font-weight:900;letter-spacing:.12em;cursor:pointer}.cta-primary{border:none;color:white;background:linear-gradient(90deg,#7c3aed,#9333ea);box-shadow:0 0 28px rgba(147,51,234,.42)}.cta-secondary{color:#fff;border:1px solid #555;background:rgba(8,8,12,.58)}
+.rail{position:absolute;z-index:4;left:45px;top:120px;bottom:58px;display:flex;flex-direction:column;justify-content:space-between;align-items:center}.line{width:1px;height:150px;background:linear-gradient(#d8b4fe,rgba(168,85,247,.35),rgba(255,255,255,.15));position:relative}.line:before{content:"";position:absolute;top:-5px;left:-4px;width:9px;height:9px;background:#e9d5ff;border-radius:50%;box-shadow:0 0 16px #c084fc}.social{display:grid;gap:24px;color:#aaa;font-weight:bold;font-size:12px}
+.bio-links{position:fixed;right:24px;bottom:92px;z-index:12;width:230px;padding:14px;border:1px solid rgba(255,255,255,.10);border-radius:18px;background:rgba(8,8,12,.72);backdrop-filter:blur(18px);box-shadow:0 18px 55px rgba(0,0,0,.35)}.bio-label{font-size:10px;letter-spacing:.18em;color:#a1a1aa;font-weight:800;margin:0 0 10px 2px}.bio-link{display:flex;align-items:center;gap:10px;width:100%;margin-top:8px;padding:11px 12px;border-radius:12px;text-decoration:none;color:#fff;font-size:12px;font-weight:850;letter-spacing:.04em;border:1px solid rgba(255,255,255,.08);transition:.2s}.bio-link:hover{transform:translateY(-1px);border-color:rgba(192,132,252,.42);box-shadow:0 0 20px rgba(139,92,246,.14)}.bio-link svg{width:18px;height:18px;flex:0 0 18px}.bio-link.whatsapp{background:rgba(31,41,35,.82)}.bio-link.telegram{background:rgba(17,32,49,.84)}.footer{position:absolute;z-index:4;left:0;right:0;bottom:18px;text-align:center;color:#8d8d94;font-size:11px;letter-spacing:.04em;padding:0 20px}.toast{position:fixed;right:22px;bottom:22px;z-index:20;background:rgba(18,18,22,.94);border:1px solid rgba(168,85,247,.4);padding:11px 14px;border-radius:10px;color:#e9d5ff;font-size:12px;display:none}
+@keyframes heroZoom{from{transform:scale(1)}to{transform:scale(1.045)}}
+@media(max-width:900px){header{padding:0 20px;height:75px}.logo{width:145px}nav{display:none}.rail{display:none}.content{width:auto;margin:0;padding:110px 24px 150px}.hero-bg{object-position:58% center}.overlay{background:linear-gradient(90deg,rgba(0,0,0,.72),rgba(0,0,0,.48))}h1{font-size:clamp(52px,15vw,82px)}.desc{font-size:14px}.bio-links{position:absolute;right:18px;left:18px;bottom:58px;width:auto;display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:10px}.bio-label{grid-column:1/-1;margin-bottom:0}.bio-link{margin-top:0;justify-content:center;padding:10px 9px}.footer{bottom:12px;font-size:10px}}
+</style>
+</head>
+<body>
+<section class="hero">
+  <img class="hero-bg" src="assets/hero-bg.png" alt="FadlyDats AI background">
+  <div class="overlay"></div>
+  <div class="glow"></div>
+  <header>
+    <img class="logo" src="assets/fadlydats-logo.png" alt="FadlyDats">
+    <nav>
+      <button class="active">HOME</button>
+      <button onclick="msg('Explore')">EXPLORE</button>
+      <button onclick="msg('Categories')">CATEGORIES</button>
+      <button onclick="msg('AI Creator')">AI CREATOR</button>
+      <button onclick="msg('Trending')">TRENDING</button>
+    </nav>
+    <button class="top-btn" onclick="openGenerator()">GENERATE ✦</button>
+  </header>
+  <aside class="rail"><div class="line"></div><div class="social"><span>IG</span><span>YT</span><span>X</span></div></aside>
+  <div class="content">
+    <div class="eyebrow">DISCOVER AI PROMPTS.</div>
+    <h1>CREATE<br>WITH <span class="purple">STYLE.</span></h1>
+    <div class="track"><span class="a"></span><span class="dot"></span><span class="b"></span></div>
+    <div class="desc">Discover striking prompt ideas for images, videos, posters, and creative campaigns.<br>Open a concept, copy the prompt, and continue with the AI tool you prefer.<br>FadlyDats AI helps you explore, collect, and use prompts faster.</div>
+    <div class="ctas"><button class="cta-primary" onclick="openGenerator()">GENERATE AT EUTYCH →</button><button class="cta-secondary" onclick="msg('View Showcase')">▶ VIEW SHOWCASE</button></div>
+  </div>
+  <div class="bio-links" aria-label="Ambil prompt">
+    <div class="bio-label">AMBIL PROMPT & UPDATE</div>
+    <a class="bio-link whatsapp" href="https://whatsapp.com/channel/0029VbDhbi0HgZWUO1ciLJ1u" target="_blank" rel="noopener noreferrer">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2a9.84 9.84 0 0 0-8.45 14.88L2 22l5.25-1.53A9.98 9.98 0 1 0 12.04 2Zm0 17.96a8.06 8.06 0 0 1-4.1-1.12l-.29-.17-3.12.91.93-3.04-.19-.31a7.91 7.91 0 1 1 6.77 3.73Zm4.36-5.93c-.24-.12-1.41-.69-1.63-.77-.22-.08-.38-.12-.54.12-.16.24-.62.77-.76.93-.14.16-.28.18-.52.06-.24-.12-1.01-.37-1.93-1.19-.71-.63-1.19-1.42-1.33-1.66-.14-.24-.01-.37.1-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.3-.74-1.78-.2-.47-.39-.4-.54-.41h-.46c-.16 0-.42.06-.64.3-.22.24-.84.82-.84 2s.86 2.32.98 2.48c.12.16 1.69 2.58 4.09 3.62.57.25 1.02.39 1.37.5.58.18 1.1.16 1.51.1.46-.07 1.41-.58 1.61-1.13.2-.56.2-1.03.14-1.13-.06-.1-.22-.16-.46-.28Z"/></svg>
+      <span>WhatsApp Channel</span>
+    </a>
+    <a class="bio-link telegram" href="https://t.me/NocturaAI_Bot" target="_blank" rel="noopener noreferrer">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m21.94 4.66-3.03 14.29c-.23 1.01-.83 1.26-1.68.78l-4.61-3.4-2.23 2.15c-.25.25-.45.45-.93.45l.33-4.69 8.54-7.72c.37-.33-.08-.52-.58-.19L7.2 12.98 2.65 11.56c-.99-.31-1.01-.99.21-1.47L20.66 3.2c.83-.3 1.55.19 1.28 1.46Z"/></svg>
+      <span>Telegram Bot</span>
+    </a>
+  </div>
+  <footer class="footer">© 2026 Fadlydats. Seluruh hak dilindungi.</footer>
+</section>
+<div id="toast" class="toast"></div>
+<script>const GENERATOR_URL='https://eutych.com/';function openGenerator(){window.open(GENERATOR_URL,'_blank','noopener,noreferrer')}function msg(t){const el=document.getElementById('toast');el.textContent=t+' — section/link can be connected next.';el.style.display='block';clearTimeout(window.__t);window.__t=setTimeout(()=>el.style.display='none',1800)}</script>
+</body>
+</html>
