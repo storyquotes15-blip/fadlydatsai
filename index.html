@@ -330,6 +330,70 @@ linear-gradient(135deg,#111124,#2b1050)}
   }
 }
 
+
+/* ===== VIDEO + SOCIAL FIX ===== */
+.card-media.video-media{
+  min-height:220px;
+  background:#07070c;
+}
+.card-media.video-media video{
+  width:100%;
+  min-height:220px;
+  max-height:520px;
+  display:block;
+  object-fit:cover;
+  background:#07070c;
+}
+.video-badge{
+  position:absolute;
+  left:12px;
+  top:12px;
+  z-index:4;
+  padding:7px 10px;
+  border-radius:999px;
+  background:rgba(0,0,0,.65);
+  border:1px solid rgba(255,255,255,.16);
+  color:#fff;
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:.08em;
+  backdrop-filter:blur(8px);
+  pointer-events:none;
+}
+.video-error{
+  min-height:260px;
+  display:grid;
+  place-items:center;
+  padding:22px;
+  text-align:center;
+  color:#ddd;
+  background:
+    radial-gradient(circle at 28% 20%,rgba(139,92,246,.30),transparent 36%),
+    linear-gradient(135deg,#0b0b14,#20103b);
+}
+.social a{
+  min-width:28px;
+  text-align:center;
+}
+.social a:hover{
+  color:#c084fc;
+  text-shadow:0 0 14px rgba(192,132,252,.55);
+}
+.bio-link.facebook{background:rgba(24,38,67,.84)}
+.bio-link.instagram{background:linear-gradient(135deg,rgba(67,27,75,.86),rgba(72,35,38,.78))}
+.bio-icon{
+  width:25px;
+  height:25px;
+  border-radius:8px;
+  display:grid;
+  place-items:center;
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.10);
+  font-size:11px;
+  font-weight:950;
+  flex:0 0 25px;
+}
+
 </style>
 </head>
 <body>
@@ -353,9 +417,9 @@ linear-gradient(135deg,#111124,#2b1050)}
   <aside class="rail">
     <div class="line"></div>
     <div class="social">
-      <a href="https://www.instagram.com/" target="_blank">IG</a>
-      <a href="https://www.youtube.com/" target="_blank">YT</a>
-      <a href="https://x.com/" target="_blank">X</a>
+      <a href="https://t.me/+vQoGTVrzrCFiMGE1" target="_blank" rel="noopener noreferrer" aria-label="Telegram">TG</a>
+      <a href="https://www.facebook.com/profile.php?id=61583899253828" target="_blank" rel="noopener noreferrer" aria-label="Facebook">FB</a>
+      <a href="https://www.instagram.com/datseditz" target="_blank" rel="noopener noreferrer" aria-label="Instagram">IG</a>
     </div>
   </aside>
 
@@ -422,17 +486,24 @@ linear-gradient(135deg,#111124,#2b1050)}
   <div class="wrap community">
     <div class="community-main">
       <div class="section-kicker">Prompt Updates</div>
-      <h2>Ambil prompt baru dari komunitas.</h2>
-      <p>Ikuti WhatsApp Channel atau Telegram untuk menerima inspirasi prompt, update, dan link terbaru.</p>
+      <h2>Ikuti FadlyDats Prompt AI.</h2>
+      <p>Ikuti Telegram, Facebook, atau Instagram untuk melihat update prompt, showcase, dan informasi terbaru.</p>
     </div>
+
     <div class="community-links">
-      <a class="bio-link whatsapp" href="https://whatsapp.com/channel/0029VbDhbi0HgZWUO1ciLJ1u" target="_blank" rel="noopener noreferrer">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2a9.84 9.84 0 0 0-8.45 14.88L2 22l5.25-1.53A9.98 9.98 0 1 0 12.04 2Zm0 17.96a8.06 8.06 0 0 1-4.1-1.12l-.29-.17-3.12.91.93-3.04-.19-.31a7.91 7.91 0 1 1 6.77 3.73Zm4.36-5.93c-.24-.12-1.41-.69-1.63-.77-.22-.08-.38-.12-.54.12-.16.24-.62.77-.76.93-.14.16-.28.18-.52.06-.24-.12-1.01-.37-1.93-1.19-.71-.63-1.19-1.42-1.33-1.66-.14-.24-.01-.37.1-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.3-.74-1.78-.2-.47-.39-.4-.54-.41h-.46c-.16 0-.42.06-.64.3-.22.24-.84.82-.84 2s.86 2.32.98 2.48c.12.16 1.69 2.58 4.09 3.62.57.25 1.02.39 1.37.5.58.18 1.1.16 1.51.1.46-.07 1.41-.58 1.61-1.13.2-.56.2-1.03.14-1.13-.06-.1-.22-.16-.46-.28Z"/></svg>
-        <span>WhatsApp Channel</span>
+      <a class="bio-link telegram" href="https://t.me/+vQoGTVrzrCFiMGE1" target="_blank" rel="noopener noreferrer">
+        <span class="bio-icon">TG</span>
+        <span>Telegram Channel</span>
       </a>
-      <a class="bio-link telegram" href="https://t.me/NocturaAI_Bot" target="_blank" rel="noopener noreferrer">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="m21.94 4.66-3.03 14.29c-.23 1.01-.83 1.26-1.68.78l-4.61-3.4-2.23 2.15c-.25.25-.45.45-.93.45l.33-4.69 8.54-7.72c.37-.33-.08-.52-.58-.19L7.2 12.98 2.65 11.56c-.99-.31-1.01-.99.21-1.47L20.66 3.2c.83-.3 1.55.19 1.28 1.46Z"/></svg>
-        <span>Telegram Bot</span>
+
+      <a class="bio-link facebook" href="https://www.facebook.com/profile.php?id=61583899253828" target="_blank" rel="noopener noreferrer">
+        <span class="bio-icon">FB</span>
+        <span>Facebook</span>
+      </a>
+
+      <a class="bio-link instagram" href="https://www.instagram.com/datseditz" target="_blank" rel="noopener noreferrer">
+        <span class="bio-icon">IG</span>
+        <span>Instagram</span>
       </a>
     </div>
   </div>
@@ -477,6 +548,7 @@ linear-gradient(135deg,#111124,#2b1050)}
 
 <div id="toast" class="toast"></div>
 
+<script src="https://cdn.jsdelivr.net/npm/hls.js@1/dist/hls.min.js"></script>
 <script>
 const CONFIG = {
   WORKER_BASE: 'https://fadlydats-showcase-api.storyquotes15.workers.dev',
@@ -554,6 +626,9 @@ async function loadCategory(category){
       throw new Error(data.error || 'Worker request failed');
     }
     currentItems=Array.isArray(data.items)?data.items:[];
+    if(category==='videos'){
+      console.log('[FadlyDats] Video API sample:', currentItems.slice(0,3));
+    }
   }catch(e){
     currentItems=[];
     msg('Showcase gagal dimuat: '+(e?.message || 'unknown error'));
@@ -569,23 +644,255 @@ function setSort(sort,el){
   renderCurrent();
 }
 
+function firstString(...values){
+  for(const v of values){
+    if(typeof v==='string' && v.trim()) return v.trim();
+  }
+  return '';
+}
+
+function firstObjectUrl(obj){
+  if(!obj || typeof obj!=='object') return '';
+  return firstString(
+    obj.url,
+    obj.src,
+    obj.href,
+    obj.video,
+    obj.videoUrl,
+    obj.video_url,
+    obj.file,
+    obj.fileUrl,
+    obj.file_url
+  );
+}
+
+function isVideoUrl(url=''){
+  const clean=String(url).toLowerCase();
+  return (
+    /\.(mp4|webm|mov|m4v|m3u8)(?:$|[?#])/i.test(clean) ||
+    /\/video(?:s)?\//i.test(clean) ||
+    /video\/upload/i.test(clean)
+  );
+}
+
+function mediaTypeHint(x){
+  return firstString(
+    x?.mediaType,
+    x?.media_type,
+    x?.type,
+    x?.kind,
+    x?.assetType,
+    x?.asset_type,
+    x?.mimeType,
+    x?.mime_type
+  ).toLowerCase();
+}
+
+function pickVideoUrl(x){
+  const directVideo = firstString(
+    typeof x?.video==='string' ? x.video : '',
+    x?.videoUrl,
+    x?.video_url,
+    x?.originalVideo,
+    x?.original_video,
+    x?.videoSrc,
+    x?.video_src,
+    x?.playbackUrl,
+    x?.playback_url
+  );
+  if(directVideo) return directVideo;
+
+  const nestedVideo = firstString(
+    firstObjectUrl(x?.video),
+    firstObjectUrl(x?.media?.video),
+    firstObjectUrl(x?.output?.video),
+    firstObjectUrl(x?.result?.video)
+  );
+  if(nestedVideo) return nestedVideo;
+
+  const typeHint=mediaTypeHint(x);
+  const categoryHint=String(
+    x?.category || currentCategory || ''
+  ).toLowerCase();
+
+  const genericCandidates=[
+    x?.mediaUrl,
+    x?.media_url,
+    typeof x?.media==='string' ? x.media : '',
+    firstObjectUrl(x?.media),
+    x?.fileUrl,
+    x?.file_url,
+    typeof x?.file==='string' ? x.file : '',
+    firstObjectUrl(x?.file),
+    x?.src,
+    x?.sourceUrl,
+    x?.source_url,
+    x?.originalUrl,
+    x?.original_url,
+    x?.downloadUrl,
+    x?.download_url,
+    firstObjectUrl(x?.asset),
+    Array.isArray(x?.assets) ? firstObjectUrl(x.assets[0]) : '',
+    Array.isArray(x?.files) ? firstObjectUrl(x.files[0]) : '',
+    firstObjectUrl(x?.output),
+    firstObjectUrl(x?.result),
+    firstObjectUrl(x?.content)
+  ].filter(Boolean);
+
+  for(const candidate of genericCandidates){
+    if(isVideoUrl(candidate)) return candidate;
+  }
+
+  // Untuk kategori Videos, mediaUrl/file/src dari API boleh tidak memiliki ekstensi.
+  if(
+    typeHint.includes('video') ||
+    categoryHint==='videos' ||
+    categoryHint==='video'
+  ){
+    const likelyVideo=firstString(
+      x?.mediaUrl,
+      x?.media_url,
+      typeof x?.media==='string' ? x.media : '',
+      x?.fileUrl,
+      x?.file_url,
+      x?.src,
+      x?.playbackUrl,
+      x?.playback_url
+    );
+    if(likelyVideo) return likelyVideo;
+  }
+
+  return '';
+}
+
+function pickImageUrl(x){
+  const candidates=[
+    x?.image,
+    x?.imageUrl,
+    x?.image_url,
+    x?.thumbnail,
+    x?.thumbnailUrl,
+    x?.thumbnail_url,
+    x?.poster,
+    x?.posterUrl,
+    x?.poster_url,
+    x?.cover,
+    x?.coverUrl,
+    x?.cover_url,
+    x?.preview,
+    x?.previewUrl,
+    x?.preview_url,
+    x?.originalImage,
+    x?.original_image,
+    firstObjectUrl(x?.thumbnail),
+    firstObjectUrl(x?.poster),
+    firstObjectUrl(x?.cover),
+    firstObjectUrl(x?.image),
+    Array.isArray(x?.images) ? firstObjectUrl(x.images[0]) || x.images[0] : ''
+  ];
+
+  for(const candidate of candidates){
+    if(typeof candidate==='string' && candidate.trim() && !isVideoUrl(candidate)){
+      return candidate.trim();
+    }
+  }
+  return '';
+}
+
 function normalizeItem(x,i){
+  const video=pickVideoUrl(x);
+  const image=pickImageUrl(x);
+
   return {
-    id:x.id || `${currentCategory}-${i}`,
-    title:x.title || x.name || 'Untitled Prompt',
-    image:x.image || x.imageUrl || x.thumbnail || '',
-    video:x.video || x.videoUrl || '',
+    id:x.id || x.uuid || x.slug || `${currentCategory}-${i}`,
+    title:x.title || x.name || x.alt || 'Untitled Prompt',
+    image,
+    poster:image,
+    video,
     category:x.category || CATEGORY_LABELS[currentCategory] || currentCategory,
-    model:x.model || x.aiModel || 'AI',
-    prompt:x.prompt || x.description || '',
-    creator:x.creator || 'FadlyDats AI',
-    likes:Number(x.likes || 0),
+    model:x.model || x.aiModel || x.ai_model || 'AI',
+    prompt:x.prompt || x.description || x.fullPrompt || x.full_prompt || '',
+    creator:x.creator || x.author || x.authorName || x.author_name || 'FadlyDats AI',
+    likes:Number(x.likes || x.likeCount || x.like_count || 0),
     featured:Boolean(x.featured),
     newest:Boolean(x.newest),
     popular:Boolean(x.popular),
     destinationUrl:x.generateUrl || x.destinationUrl || CONFIG.GENERATOR_URL
   }
 }
+
+
+function videoCardHtml(item){
+  const poster=item.poster
+    ? ` poster="${escAttr(item.poster)}"`
+    : '';
+
+  return `
+    <div class="card-media video-media">
+      <span class="video-badge">▶ VIDEO</span>
+      <video
+        class="showcase-video"
+        data-video-src="${escAttr(item.video)}"
+        ${poster}
+        controls
+        muted
+        loop
+        playsinline
+        preload="metadata"
+      ></video>
+    </div>`;
+}
+
+function mountVideoElement(video){
+  if(!video) return;
+
+  const url=video.dataset.videoSrc || '';
+  if(!url) return;
+
+  if(/\.m3u8(?:$|[?#])/i.test(url)){
+    if(video.canPlayType('application/vnd.apple.mpegurl')){
+      video.src=url;
+      return;
+    }
+
+    if(window.Hls && Hls.isSupported()){
+      const hls=new Hls({
+        enableWorker:true,
+        lowLatencyMode:false
+      });
+      hls.loadSource(url);
+      hls.attachMedia(video);
+      video.__hls=hls;
+      return;
+    }
+  }
+
+  video.src=url;
+}
+
+function mountAllVideos(root=document){
+  root.querySelectorAll('video.showcase-video').forEach(video=>{
+    if(video.dataset.mounted==='1') return;
+    video.dataset.mounted='1';
+    mountVideoElement(video);
+  });
+}
+
+function detailVideoHtml(item){
+  const poster=item.poster
+    ? ` poster="${escAttr(item.poster)}"`
+    : '';
+
+  return `<video
+    class="showcase-video"
+    data-video-src="${escAttr(item.video)}"
+    ${poster}
+    controls
+    playsinline
+    preload="metadata"
+  ></video>`;
+}
+
 
 function renderCurrent(){
   const q=(document.getElementById('searchInput').value||'').toLowerCase().trim();
@@ -611,7 +918,7 @@ function renderCurrent(){
     const card=document.createElement('article');
     card.className='card';
     const media=item.video
-      ? `<div class="card-media"><video src="${escAttr(item.video)}" muted loop playsinline onmouseenter="this.play()" onmouseleave="this.pause();this.currentTime=0"></video></div>`
+      ? videoCardHtml(item)
       : item.image
         ? `<div class="card-media"><img loading="lazy" src="${escAttr(item.image)}" alt="${escAttr(item.title)}"></div>`
         : `<div class="card-media card-fallback"><strong>${escHtml(item.title)}</strong></div>`;
@@ -631,6 +938,8 @@ function renderCurrent(){
     card.querySelector('.btn-use').onclick=e=>{e.stopPropagation();activeItem=item;usePrompt()};
     grid.appendChild(card);
   });
+
+  mountAllVideos(grid);
 }
 
 function openDetail(item){
@@ -643,7 +952,8 @@ function openDetail(item){
 
   const media=document.getElementById('detailMedia');
   if(item.video){
-    media.innerHTML=`<video src="${escAttr(item.video)}" controls autoplay muted loop playsinline></video>`;
+    media.innerHTML=detailVideoHtml(item);
+    mountAllVideos(media);
   }else if(item.image){
     media.innerHTML=`<img src="${escAttr(item.image)}" alt="${escAttr(item.title)}">`;
   }else{
@@ -655,8 +965,13 @@ function openDetail(item){
   currentItems.map(normalizeItem).filter(x=>x.id!==item.id).slice(0,4).forEach(x=>{
     const d=document.createElement('div');
     d.className='related-card';
-    if(x.image){
+    if(x.video && x.poster){
+      d.innerHTML=`<img src="${escAttr(x.poster)}" alt="${escAttr(x.title)}"><span style="position:absolute;left:9px;top:9px;background:rgba(0,0,0,.68);color:#fff;border-radius:999px;padding:5px 8px;font-size:10px;font-weight:900">▶ VIDEO</span>`;
+      d.style.position='relative';
+    }else if(x.image){
       d.innerHTML=`<img src="${escAttr(x.image)}" alt="${escAttr(x.title)}">`;
+    }else if(x.video){
+      d.innerHTML=`<div class="related-fallback">▶ ${escHtml(x.title)}</div>`;
     }else{
       d.innerHTML=`<div class="related-fallback">${escHtml(x.title)}</div>`;
     }
